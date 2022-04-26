@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true, limit: '1mb' }));
 app.use(
     cors({
         credentials: true,
-        origin: 'https://stack-underflow-niket.netlify.app/',
+        origin: 'https://stack-underflow-niket.netlify.app',
     })
 );
 app.use(limiter);
