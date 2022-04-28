@@ -14,9 +14,17 @@ exports.addQuestion = catchAsync(async (req, res, next) => {
 });
 
 exports.getAllQuestions = catchAsync(async (req, res, next) => {
-    const questions = await Questions.find()
-        .populate('userPosted')
-        .populate('answers.user');
+    let questions;
+    if (req.query.tag) {
+        questions = await Questions.find({ questionTags: req.query.tag })
+            .populate('userPosted')
+            .populate('answers.user');
+    } else {
+        questions = await Questions.find()
+            .populate('userPosted')
+            .populate('answers.user');
+    }
+
     res.status(200).json({
         status: 'success',
         data: {
